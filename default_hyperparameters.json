@@ -1,0 +1,15 @@
+{
+    "batch_size": 10,
+    "nb_filters": 40,
+    "compared_length": null,
+    "depth": 10,
+    "nb_steps": 1000,
+    "nb_steps_pretrain": 1000,
+    "kernel_size": 3,
+    "penalty": null,
+    "lr": 0.001,
+    "nb_random_samples": 1,
+    "negative_penalty": 1,
+    "latent_dim": 320,
+    "reduced_size": 160
+}
