@@ -5,6 +5,8 @@ This is the code corresponding to the experiments conducted for the work
 (Baptiste Lafabregue, Jonathan Weber, Pierre Gançarki & Germain Forestier),
 in submission
 
+The results obtained for this paper on both archives are reported in the [paper_results/ folder](https://github.com/blafabregue/TimeSeriesDeepClustering/tree/main/paper_results)
+
 ## Datasets
 
 The dataset used for the paper are available at : http://www.timeseriesclassification.com/ 
@@ -33,7 +35,7 @@ conda install tensorflow-gpu
 First, to train the networks you need to convert them into .npy files. 
 The CBF dataset is provided as an example. 
 To do so you can use the `utils.py` script but you need first to change the two last line 
-of the script [here](https://github.com/blafabregue/TimeSeriesDeepClustering/utils.py#L552). 
+of the script [here](https://github.com/blafabregue/TimeSeriesDeepClustering/blob/1503c70053bbc8ec5ff34032c69e45099012c4ea/utils.py#L552). 
 Note that this script is suited to extract data from .sktime files
 
 ### Train networks
