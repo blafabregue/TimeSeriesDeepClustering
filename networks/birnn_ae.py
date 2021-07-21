@@ -45,9 +45,19 @@ class AutoEncoder(LayersGenerator):
         with tf.name_scope('encoder'):
             h = self.input_
             for i in range(len(self.n_filters_RNN_list)-1):
-                h = layers.Bidirectional(layers.LSTM(self.n_filters_RNN_list[i], return_sequences=True))(h)
+                if self.cell_type == 'LSTM':
+                    h = layers.Bidirectional(layers.LSTM(self.n_filters_RNN_list[i], return_sequences=True))(h)
+                elif self.cell_type == 'GRU':
+                    h = layers.Bidirectional(layers.GRU(self.n_filters_RNN_list[i], return_sequences=True))(h)
+                elif self.cell_type == 'RNN':
+                    h = layers.Bidirectional(layers.RNN(self.n_filters_RNN_list[i], return_sequences=True))(h)
 
-            h = layers.Bidirectional(layers.LSTM(self.n_filters_RNN_list[-1]))(h)
+            if self.cell_type == 'LSTM':
+                h = layers.Bidirectional(layers.LSTM(self.n_filters_RNN_list[-1]))(h)
+            elif self.cell_type == 'GRU':
+                h = layers.Bidirectional(layers.GRU(self.n_filters_RNN_list[-1]))(h)
+            elif self.cell_type == 'RNN':
+                h = layers.Bidirectional(layers.RNN(self.n_filters_RNN_list[-1]))(h)
 
         return Model(inputs=self.input_, outputs=h), None
 
@@ -58,7 +68,12 @@ class AutoEncoder(LayersGenerator):
             h = layers.RepeatVector(self.L)(decoder_input)
             decoder_filters = np.flip(self.n_filters_RNN_list)
             for i in range(len(decoder_filters)):
-                h = layers.Bidirectional(layers.LSTM(decoder_filters[i], return_sequences=True))(h)
+                if self.cell_type == 'LSTM':
+                    h = layers.Bidirectional(layers.LSTM(decoder_filters[i], return_sequences=True))(h)
+                elif self.cell_type == 'GRU':
+                    h = layers.Bidirectional(layers.GRU(decoder_filters[i], return_sequences=True))(h)
+                elif self.cell_type == 'RNN':
+                    h = layers.Bidirectional(layers.RNN(decoder_filters[i], return_sequences=True))(h)
 
             decode = layers.TimeDistributed(layers.Dense(self.C))(h)
 

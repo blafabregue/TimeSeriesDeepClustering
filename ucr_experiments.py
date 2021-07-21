@@ -16,7 +16,7 @@ import traceback
 import tensorflow as tf
 
 from networks.encoders import EncoderModel
-from networks import mlp_ae, dilated_causal_cnn, bi_dilated_RNN, bilstm_ae, fcnn_ae, resnet, birnn_ae
+from networks import mlp_ae, dilated_causal_cnn, bi_dilated_RNN, bilstm_ae, fcnn_ae, resnet, birnn_ae, attention_rnn
 from losses.losses import JointLearningLoss, TripletLoss, MSELoss, CombinedLoss, VAELoss
 from networks.SDCN import SDCN
 from networks.IDEC import IDEC
@@ -37,9 +37,10 @@ def parse_arguments():
     parser.add_argument('--archives', type=str, metavar='DIR', required=True,
                         help='archive name')
     parser.add_argument('--architecture', type=str, metavar='xxx', required=True,
-                        choices=['dilated_cnn', 'mlp', 'fcnn', 'res_cnn', 'bi_lstm', 'dilated_rnn', 'bi_rnn', 'bi_gru'],
+                        choices=['dilated_cnn', 'mlp', 'fcnn', 'res_cnn', 'bi_lstm', 'dilated_rnn', 'bi_rnn', 'bi_gru',
+                                 'attention'],
                         help='Type of encoder architecture to use among : '
-                             '[dilated_cnn, mlp, fcnn, res_cnn, bi_lstm, dilated_rnn, bi_rnn, bi_gru]')
+                             '[dilated_cnn, mlp, fcnn, res_cnn, bi_lstm, dilated_rnn, bi_rnn, bi_gru, attention]')
     parser.add_argument('--encoder_loss', type=str, metavar='xxx', required=True,
                         choices=['joint', 'reconstruction', 'triplet', 'vae', 'combined'],
                         help='Type of loss to pretrain the encoder to use among : '
@@ -150,6 +151,9 @@ if __name__ == '__main__':
     elif architecture == "bi_gru":
         layers_generator = birnn_ae.AutoEncoder(x_train, encoder_loss, nb_classes,
                                                 latent_dim=params['latent_dim'], cell_type='GRU')
+    elif architecture == "attention":
+        layers_generator = attention_rnn.AutoEncoder(x_train, encoder_loss, nb_classes,
+                                                     latent_dim=params['latent_dim'])
     elif architecture == "mlp":
         layers_generator = mlp_ae.AutoEncoder(x_train, encoder_loss,
                                               latent_dim=params['latent_dim'], dropout_rate=dropout_rate)
