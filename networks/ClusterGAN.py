@@ -63,7 +63,7 @@ class ClusterGAN(Trainer):
         self.beta_cycle_label = beta_cycle_label
         self.allow_pretrain = False
         if optimizer is None:
-            optimizer = tf.keras.optimizers.Adam(lr=1e-4)
+            optimizer = tf.keras.optimizers.legacy.Adam(lr=1e-4)
         self.optimizer_discriminator = copy.deepcopy(optimizer)
         self.optimizer_generator = copy.deepcopy(optimizer)
         self.dim_gen = 0

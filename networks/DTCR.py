@@ -55,7 +55,7 @@ class DTCR(Trainer):
             self.pretrain_model = True
 
         if self.optimizer is None:
-            self.optimizer = tf.keras.optimizers.Adam(learning_rate=5e-3)
+            self.optimizer = tf.keras.optimizers.legacy.Adam(learning_rate=5e-3)
 
         # fake/real classification task
         inputs = self.encoder.inputs

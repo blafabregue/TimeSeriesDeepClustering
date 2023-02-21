@@ -44,7 +44,7 @@ class SupervisedResearch(object):
         self.optimizer = optimizer
 
         if self.optimizer is None:
-            self.optimizer = tf.keras.optimizers.Adam()
+            self.optimizer = tf.keras.optimizers.legacy.Adam()
 
     def load_weights(self, weights_path):
         """

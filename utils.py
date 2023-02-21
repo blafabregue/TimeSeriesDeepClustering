@@ -17,7 +17,7 @@ from functools import partial
 import scipy.sparse as sp
 
 from sklearn.metrics import silhouette_score
-from sktime.datasets.base import load_UCR_UEA_dataset
+from sktime.datasets import load_UCR_UEA_dataset
 
 from tslearn.metrics import dtw
 from tslearn.barycenters import dtw_barycenter_averaging

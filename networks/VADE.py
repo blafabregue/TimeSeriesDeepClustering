@@ -60,7 +60,7 @@ class VADE(Trainer):
             self.pretrain_model = True
 
         if self.optimizer is None:
-            self.optimizer = tf.keras.optimizers.Adam()
+            self.optimizer = tf.keras.optimizers.legacy.Adam()
 
         gamma_layer = Lambda(self.get_gamma, output_shape=(self.n_clusters,))(self.encoder.output)
         self.p_c_z_output = Model(inputs=self.encoder.input, outputs=gamma_layer)

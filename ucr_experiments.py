@@ -117,7 +117,7 @@ if __name__ == '__main__':
     if params['nb_steps_pretrain'] is None:
         params['nb_steps_pretrain'] = params['nb_steps']
 
-    optimizer = tf.keras.optimizers.Adam(params['lr'])
+    optimizer = tf.keras.optimizers.legacy.Adam(params['lr'])
     layers_generator = None
     loss = None
     trainer = None

@@ -120,7 +120,7 @@ class IDEC(Trainer):
             self.pretrain_model = True
 
         if self.optimizer is None:
-            self.optimizer = tf.keras.optimizers.Adam()
+            self.optimizer = tf.keras.optimizers.legacy.Adam()
 
         clustering_layer = ClusteringLayer(self.n_clusters, name='clustering')(self.encoder.output)
         self.dec_model = Model(inputs=self.encoder.input, outputs=clustering_layer)

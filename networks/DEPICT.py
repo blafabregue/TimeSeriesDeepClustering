@@ -56,7 +56,7 @@ class DEPICT(Trainer):
             self.pretrain_model = True
 
         if self.optimizer is None:
-            self.optimizer = tf.keras.optimizers.Adam()
+            self.optimizer = tf.keras.optimizers.legacy.Adam()
 
         clustering_layer = tf.keras.layers.Dense(self.n_clusters, name='clustering')(self.encoder.output)
         clustering_layer = tf.keras.layers.Softmax()(clustering_layer)

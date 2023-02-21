@@ -90,7 +90,7 @@ class SDCN(Trainer):
             self.pretrain_model = True
 
         if self.optimizer is None:
-            self.optimizer = tf.keras.optimizers.Adam()
+            self.optimizer = tf.keras.optimizers.legacy.Adam()
 
         if not self.graph_path.endswith('.npy'):
             self.graph_path = self.graph_path + '/graph.npy'
